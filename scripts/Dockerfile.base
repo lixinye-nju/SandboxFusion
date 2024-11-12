@@ -1,5 +1,9 @@
 FROM vemlp-cn-beijing.cr.volces.com/preset-images/mirror:ubuntu-focal-20231211
 
+# proxy server
+ENV HTTP_PROXY=http://172.17.0.1:7890
+ENV HTTPS_PROXY=http://172.17.0.1:7890
+
 COPY ./scripts/tuna-apt.sh ./scripts/tuna-apt.sh
 ENV DEBIAN_FRONTEND=noninteractive
 RUN bash ./scripts/tuna-apt.sh 20.04 \
@@ -65,10 +69,10 @@ RUN apt-get install -y r-base lua5.2 luarocks ruby-full julia scala \
     && PERL_MM_USE_DEFAULT=1 cpan Test::Deep Data::Compare
 
 # D
-RUN wget https://netcologne.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list \
-    && apt-get update --allow-insecure-repositories -y \
-    && apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring \
-    && apt-get update && apt-get install -y dmd-compiler dub
+# RUN wget https://netcologne.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list \
+#     && apt-get update --allow-insecure-repositories -y \
+#     && apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring \
+#     && apt-get update && apt-get install -y dmd-compiler dub
 
 # kotlin
 RUN curl -o /tmp/kotlin-compiler.zip -SL https://github.com/JetBrains/kotlin/releases/download/v2.0.0/kotlin-compiler-2.0.0.zip \
