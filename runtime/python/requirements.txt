@@ -99,3 +99,5 @@ astor==0.8.1
 jupyter==1.0.0
 jupyter_client==8.6.2
 seaborn==0.13.2
+
+hypothesis==6.118.7
